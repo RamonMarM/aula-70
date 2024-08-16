@@ -25,7 +25,7 @@ def send_simple_message():
   	return requests.post(
   		"https://api.mailgun.net/v3/sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org/messages",
   		auth=("api", "pubkey-e247f1435cfcea7d137536ad517d6a76"),
-  		data={"from": "Excited User <mailgun@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org>",
+  		data={"from": "Tetse <mailgun@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org>",
   			"to": "ramonmendoncamar10@gmail.com",
   			"subject": "Hello",
   			"text": "Testing some Mailgun awesomeness!"})
@@ -74,9 +74,9 @@ def internal_server_error(e):
 def index():
     form = NameForm()
     if form.validate_on_submit():
+        send_simple_message()
         user = User.query.filter_by(username=form.name.data).first()
         if user is None:
-            send_simple_message()
             user = User(username=form.name.data)
             db.session.add(user)
             db.session.commit()
