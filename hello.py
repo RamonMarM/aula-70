@@ -25,8 +25,8 @@ def send_simple_message():
   	return requests.post(
   		"https://api.mailgun.net/v3/sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org/messages",
   		auth=("api", "pubkey-e247f1435cfcea7d137536ad517d6a76"),
-  		data={"from": "Tetse <mailgun@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org>",
-  			"to": "ramonmendoncamar10@gmail.com",
+  		data={"from": "Excited User <mailgun@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org>",
+  			"to": ["ramonmendoncamar10@gmail.com", "YOU@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org"],
   			"subject": "Hello",
   			"text": "Testing some Mailgun awesomeness!"})
 
