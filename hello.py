@@ -63,12 +63,13 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+
 def send_simple_message():
   	return requests.post(
-  		"https://api.mailgun.net/v3/sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org/messages",
-  		auth=("api", "8aafaf6fef3fb8c3bbda94624218a745-2b91eb47-289407de"),
-  		data={"from": "Ramon Martins <mailgun@sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org>",
-  			"to": ["ramonmendoncapiu@gmail.com", "flaskaulasweb@zohomail.com"],
+  		"https://api.mailgun.net/v3/sandbox59e2363bd1af4261b42440f4c044d44a.mailgun.org/messages",
+  		auth=("api", "8a399a332e3d31c60c580ba9e43d8927-2b91eb47-b8117fdb"),
+  		data={"from": "Ramon Martins <mailgun@sandbox59e2363bd1af4261b42440f4c044d44a.mailgun.org>",
+  			"to": ["flaskaulasweb@zohomail.com"],
   			"subject": "Envio de email avaliacao 70",
   			"text": "Teste Teste Teste!"})
 
