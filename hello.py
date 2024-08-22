@@ -21,14 +21,6 @@ moment = Moment(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-def send_simple_message():
-  	return requests.post(
-  		"https://api.mailgun.net/v3/sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org/messages",
-  		auth=("api", "pubkey-e247f1435cfcea7d137536ad517d6a76"),
-  		data={"from": "Excited User <mailgun@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org>",
-  			"to": ["ramonmendoncamar10@gmail.com", "YOU@sandboxd35915ad14e24831bd0a261d7e45353d.mailgun.org"],
-  			"subject": "Hello",
-  			"text": "Testing some Mailgun awesomeness!"})
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -69,18 +61,27 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+def send_simple_message():
+  	return requests.post(
+  		"https://api.mailgun.net/v3/sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org/messages",
+  		auth=("api", "YOUR_API_KEY"),
+  		data={"from": "Excited User <mailgun@sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org>",
+  			"to": ["ramonmendoncamar10@gmail.com"],
+  			"subject": "Envio de email avaliacao 70",
+  			"text": "Testing some Mailgun awesomeness!"})
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = NameForm()
     if form.validate_on_submit():
-        send_simple_message()
         user = User.query.filter_by(username=form.name.data).first()
         if user is None:
             user = User(username=form.name.data)
             db.session.add(user)
             db.session.commit()
             session['known'] = False
+            send_simple_message()
         else:
             session['known'] = True
         session['name'] = form.name.data
