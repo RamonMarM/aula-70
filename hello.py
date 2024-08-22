@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, session, redirect, url_for
+import logging
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
@@ -7,6 +8,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import requests
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -64,11 +66,11 @@ def internal_server_error(e):
 def send_simple_message():
   	return requests.post(
   		"https://api.mailgun.net/v3/sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org/messages",
-  		auth=("api", "YOUR_API_KEY"),
-  		data={"from": "Excited User <mailgun@sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org>",
-  			"to": ["ramonmendoncamar10@gmail.com"],
+  		auth=("api", "8aafaf6fef3fb8c3bbda94624218a745-2b91eb47-289407de"),
+  		data={"from": "Ramon Martins <mailgun@sandbox7c5e54924d7a462e8f7b0ba5ddc3c066.mailgun.org>",
+  			"to": ["ramonmendoncapiu@gmail.com", "flaskaulasweb@zohomail.com"],
   			"subject": "Envio de email avaliacao 70",
-  			"text": "Testing some Mailgun awesomeness!"})
+  			"text": "Teste Teste Teste!"})
 
 
 @app.route('/', methods=['GET', 'POST'])
